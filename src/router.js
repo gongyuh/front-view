@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-const Login = () => {/*webpackChunkName:'login*/ './views/Login.vue'}
-const Reg = () => {/*webpackChunkName:'reg*/ './views/Reg.vue'}
-const Forget = () => {/*webpackChunkName:'forget*/ './views/Forget.vue'}
+//路由懒加载
+const Login = () => import(/*webpackChunkName:'login*/ './views/Login.vue')
+const Reg = () => import(/*webpackChunkName:'reg*/ './views/Reg.vue')
+const Forget = () => import(/*webpackChunkName:'forget*/ './views/Forget.vue')
 
 
 Vue.use(VueRouter)
@@ -11,17 +11,17 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/login',
-    name: 'login',
+    name: 'home',
     component: Login
   },
   {
     path: '/reg',
-    name: 'login',
+    name: 'home',
     component: Reg
   },
   {
     path: '/forget',
-    name: 'login',
+    name: 'home',
     component: Forget
   },
 ]

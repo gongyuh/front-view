@@ -1,13 +1,13 @@
 <template>
-    <div id="app">
-        login
+    <div>
+        footer
     </div>
 </template>
 
 <script>
-    export default {
-        name:'login'
-    }
+export default{
+    name:'footer'
+}
 </script>
 
 <style lang="scss" scoped>
