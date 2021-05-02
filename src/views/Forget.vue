@@ -55,10 +55,11 @@
             <div class="layui-form layui-form-pane">
               <form method="post">
                 <div class="layui-form-item">
-                  <label for="L_email" class="layui-form-label">邮箱</label>
+                  <label for="L_email" class="layui-form-label" >邮箱</label>
                   <div class="layui-input-inline">
                     <input
                       type="text"
+                      v-model="usrnmae"
                       id="L_email"
                       name="email"
                       required
@@ -70,13 +71,14 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_vercode" class="layui-form-label"
-                    >人类验证</label
+                    >验证码</label
                   >
                   <div class="layui-input-inline">
                     <input
                       type="text"
                       id="L_vercode"
                       name="vercode"
+                      v-model="code"
                       required
                       lay-verify="required"
                       placeholder="请回答后面的问题"
@@ -85,11 +87,11 @@
                     />
                   </div>
                   <div class="layui-form-mid">
-                    <span style="color: #c00;">123</span>
+                    <span style="color: #c00;" v-html="svg"></span>
                   </div>
                 </div>
                 <div class="layui-form-item">
-                  <button class="layui-btn" alert="1" lay-filter="*" lay-submit>
+                  <button class="layui-btn" @click="submit()" alert="1" lay-filter="*" lay-submit>
                     提交
                   </button>
                 </div>
@@ -103,8 +105,40 @@
 </template>
 
 <script>
+import { getCode, forget} from '../api/login'
 export default {
   name: "forget",
+  data(){
+    return {
+      username:'',
+      code:'',
+      svg:''
+    }
+  },
+  mounted() {
+    this._getCode()
+  },
+  methods:{
+    _getCode () {
+      getCode().then((res)=>{
+        if(res.code === 200 ){
+          console.log(res)
+          this.svg = res.data
+        }
+      })
+    },
+    submit() {
+      forget({
+        username:this.username,
+        code:this.code
+      }).then((res) => {
+        console.log(res)
+        if(res.code === 200){
+          alert('邮件发送成功')
+        }
+      })
+    }
+  }
 };
 </script>
 
