@@ -13,15 +13,13 @@ class HttpRequest {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
+       //请求超过了十秒钟断定请求失败
       timeout: 10000,
     };
     return config
   }
   //设定拦截器
-  interceptors() {
-      //请求超过了十秒钟断定请求失败
-    const instance = axios.create();
-
+  interceptors(instance) {
     // 请求拦截器
     instance.interceptors.request.use(
       (config) => {

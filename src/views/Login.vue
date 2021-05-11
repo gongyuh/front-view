@@ -96,7 +96,8 @@
 </template>
 
 <script>
-import {getCode} from '@/api/login'
+import { getCode, login } from '@/api/login'
+import { v4 as uuidv4 } from 'uuid';
 export default {
   name: "login",
   data() {
@@ -108,14 +109,36 @@ export default {
     };
   },
   mounted() {
+    let sid = ''
+    if (localStorage.getItem('sid')) {
+      sid = localStorage.getItem('sid')
+    } else {
+      sid = uuidv4()
+      localStorage.setItem('sid', sid)
+    }
+    this.$store.commit('setSid', sid)
+    console.log(sid)
     this._getCode()
   },
   methods:{
     _getCode () {
-      getCode().then((res)=>{
+      let sid = this.$store.state.sid
+      getCode(sid).then((res)=>{
         if(res.code === 200 ){
           console.log(res)
           this.svg = res.data
+        }
+      })
+    },
+    submit () {
+      login({
+        username: this.username,
+        password: this.password,
+        code: this.code,
+        sid: this.$store.state.sid
+      }).then((res) => {
+        if (res.code === 200) {
+          console.log(res)
         }
       })
     }
