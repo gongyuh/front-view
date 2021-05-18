@@ -78,7 +78,7 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_vercode" class="layui-form-label"
-                    >人类验证</label
+                    >验证码</label
                   >
                   <div class="layui-input-inline">
                     <input
@@ -87,17 +87,17 @@
                       name="vercode"
                       required
                       lay-verify="required"
-                      placeholder="请回答后面的问题"
+                      placeholder="输入验证码"
                       autocomplete="off"
                       class="layui-input"
                     />
                   </div>
                   <div class="layui-form-mid">
-                    <span style="color: #c00;">123</span>
+                    <span class="svg" style="color: #c00;" @click="_getCode()" v-html="svg"></span>
                   </div>
                 </div>
                 <div class="layui-form-item">
-                  <button class="layui-btn" lay-filter="*" lay-submit>
+                  <button class="layui-btn" type="button" @click="submit()">
                     立即注册
                   </button>
                 </div>
@@ -126,9 +126,67 @@
 </template>
 
 <script>
+import { getCode, reg } from '@/api/login'
 export default {
-  name: "reg",
+  name: 'reg',
+  data () {
+    return {
+      username: '',
+      name: '',
+      password: '',
+      repassword: '',
+      code: '',
+      svg: ''
+    }
+  },
+  components: {
+  },
+  mounted () {
+    this._getCode()
+  },
+  methods: {
+    _getCode () {
+      let sid = this.$store.state.sid
+      getCode(sid).then((res) => {
+        if (res.code === 200) {
+          this.svg = res.data
+        }
+      })
+    },
+    async submit () {
+      reg({
+        username: this.username,
+        password: this.password,
+        name: this.name,
+        code: this.code,
+        sid: this.$store.state.sid
+      }).then((res) => {
+        if (res.code === 200) {
+          this.username = ''
+          this.password = ''
+          this.repassword = ''
+          this.name = ''
+          this.code = ''
+          // 跳转到登录界面，让用户登录
+          this.$alert('注册成功')
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 1000)
+          console.log(res)
+        } else {
+          // username -> '用户名已经注册'
+          // res.msg = { username: [], name: [], code: []}
+          this.$alert(res.msg)
+        }
+      })
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.svg {
+  position:relative;
+  top:-10px;
+}
+</style>

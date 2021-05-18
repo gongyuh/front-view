@@ -64,7 +64,7 @@
                   </div>
                 </div>
                 <div class="layui-form-item">
-                  <button class="layui-btn" lay-filter="*" lay-submit>
+                  <button class="layui-btn" type="button" @click="submit()">
                     立即登录
                   </button>
                   <span style="padding-left:20px;">
@@ -97,7 +97,7 @@
 
 <script>
 import { getCode, login } from '@/api/login'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 export default {
   name: "login",
   data() {
@@ -140,6 +140,14 @@ export default {
         if (res.code === 200) {
           console.log(res)
         }
+      }).catch((err) => {
+        const data = err.response.data
+        if (data.code === 500) {
+          this.$alert('用户名密码校验失败，请检查！')
+        } else {
+          this.$alert('服务器错误')
+        }
+        console.log(err.response)
       })
     }
   }

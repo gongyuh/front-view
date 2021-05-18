@@ -5,7 +5,7 @@ import axios from '@/util/request'
  * @param {*} sid 唯一标识
  */
 const getCode = (sid) => {
-    return axios.get('/getCaptcha',{
+    return axios.get('/public/getCaptcha',{
         params: {
             sid: sid
           }
@@ -27,13 +27,24 @@ const forget = (option) => {
  * @param {*} loginInfo 用户登录信息
  */
  const login = (loginInfo) => {
-    return axios.post('/login', {
+    return axios.post('/login/login', {
       ...loginInfo
     })
   }
 
+/**
+ * 注册接口
+ * @param {*} regInfo 用户注册信息
+ */
+ const reg = (regInfo) => {
+  return axios.post('/login/reg', {
+    ...regInfo
+  })
+}
+
 export {
-    getCode,
-    forget,
-    login
+  getCode,
+  forget,
+  login,
+  reg
 }

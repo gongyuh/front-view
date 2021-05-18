@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 //路由懒加载
-const Login = () => import(/*webpackChunkName:'login*/ './views/Login.vue')
-const Reg = () => import(/*webpackChunkName:'reg*/ './views/Reg.vue')
-const Forget = () => import(/*webpackChunkName:'forget*/ './views/Forget.vue')
+const Login = () => import('./views/Login.vue')
+const Reg = () => import('./views/Reg.vue')
+const Forget = () => import('./views/Forget.vue')
 
 
 Vue.use(VueRouter)
@@ -17,7 +17,14 @@ const routes = [
   {
     path: '/reg',
     name: 'reg',
-    component: Reg
+    component: Reg,
+    beforeEnter: (to, from, next) => {
+      if (from.name === 'login') {
+        next()
+      } else {
+        next('/login')
+      }
+    }
   },
   {
     path: '/forget',

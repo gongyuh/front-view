@@ -12,7 +12,7 @@ export default new Vuex.Store({
       state.sid = value
     }
   },
-  actions: {
+  actions: {  
   },
   modules: {
   }
