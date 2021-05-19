@@ -6,6 +6,10 @@ import Home from'./views/Home.vue'
 const Login = () => import('./views/Login.vue')
 const Reg = () => import('./views/Reg.vue')
 const Forget = () => import('./views/Forget.vue')
+const Index = () =>
+  import(/* webpackChunkName: 'index' */ './views/channels/Index.vue')
+const Template1 = () =>
+  import(/* webpackChunkName: 'template1' */ './views/channels/Template1.vue')
 
 
 Vue.use(VueRouter)
@@ -13,8 +17,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path:'/',
-    name:'index',
-    component:Home
+    component: Home,
+    children:[
+    {
+      path: '',
+      name:'index',
+      component:Index
+    },
+    {
+      path: '/index/:catalog',
+      name: 'catalog',
+      component: Template1
+    }
+    ],
   },
   {
     path: '/login',
