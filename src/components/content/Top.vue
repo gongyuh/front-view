@@ -9,16 +9,21 @@
         style="color: #FF5722;"
       >去签到</a>
     </div>
-    <list-item></list-item>
+    <list-item :lists="lists" :isShow="false"></list-item>
   </div>
 </template>
 
 <script>
+import ListItem from './ListItem'
 export default {
   name: 'top',
+  components:{
+    'list-item': ListItem
+  },
   data () {
     return {
-      isTop: 1
+      isTop: 1,
+      lists:[11,11]
     }
   }
 }

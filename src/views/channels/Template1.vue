@@ -1,6 +1,5 @@
 <template>
   <div class="layui-container">
-      this is template
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md8">
                 <list></list>

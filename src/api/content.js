@@ -1,4 +1,4 @@
-import axios from '../uitl/request'
+import axios from '../util/request'
 import qs from 'qs'
 
 /* 
