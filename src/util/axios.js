@@ -5,6 +5,7 @@ import errorHandle from "./errorHandle";
 class HttpRequest {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
+    // this.pending = {}
   }
   //获取axios的配置
   getInsideConfig() {
@@ -18,12 +19,18 @@ class HttpRequest {
     };
     return config
   }
+  // removePending (key, isRequest = false) {
+  //   if (this.pending[key] && isRequest) {
+  //     this.pending[key]('取消重复请求')
+  //   }
+  //   delete this.pending[key]
+  // }
   //设定拦截器
   interceptors(instance) {
     // 请求拦截器
     instance.interceptors.request.use(
       (config) => {
-        // Do something before request is sent
+
         console.log("config:" + config);
         return config;
       },

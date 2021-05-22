@@ -40,10 +40,29 @@ export default {
   components: {
     'list-item':ListItem
   },
+  watch: {
+    current (newval, oldval) {
+      // 去兼听current标签是否有变化，如果有变化，则需要重新进行查询
+      this.init()
+    },
+    $route (newval, oldval) {
+      let catalog = this.$route.params['catalog']
+      if (typeof catalog !== 'undefined' && catalog !== '') {
+        this.catalog = catalog
+      }
+      this.init()
+    } 
+  },
   mounted () {
       this._getLists()
   },
   methods: {
+    init () {
+      this.page = 0
+      this.lists = []
+      this.isEnd = false
+      this._getLists()
+    },
     search (val) {
       if (typeof val === 'undefined' && this.current === '') {
         return
@@ -81,6 +100,9 @@ export default {
       }
     },
     _getLists () {
+      if (this.isRepeat) return
+      if (this.isEnd) return
+      this.isRepeat = true
       let options = {
         catalog: this.catalog,
         isTop: this.isTop,
