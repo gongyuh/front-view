@@ -1,16 +1,15 @@
 <template>
-  <div class="fly-panel">
-   广告
+  <div>
+      用户中心
   </div>
 </template>
 
 <script>
 export default {
-    name:'ads',
     data() {
-    return {
-
-    }
+        return {
+            name: 'center'
+        }
     },
     components: {
 

@@ -2,21 +2,21 @@
   <div>
     <ul class="fly-list">
       <li v-for="(item,index) in items" :key="'listitem' + index">
-        <router-link class="fly-avatar" :to="{name: 'home', params: {uid: item.uid._id}}" link>
-          <img :src="item.uid.pic ? item.uid.pic : '/img/header.jpg'" alt="贤心" />
+        <router-link class="fly-avatar" :to="{name: 'home', params: {uid: item._id}}" link>
+          <img :src="item.pic ? item.pic : '/img/header.jpg'" alt="贤心" />
         </router-link>
         <h2>
           <a class="layui-badge">{{item.catalog}}</a>
           <router-link :to="{name: 'detail', params: {tid: item._id}}">{{item.title}}</router-link>
         </h2>
         <div class="fly-list-info">
-          <router-link :to="{name: 'home', params: {uid: item.uid._id}}" link>
-            <cite>{{item.uid.name}}</cite>
+          <router-link :to="{name: 'home', params: {uid: item._id}}" link>
+            <cite>{{item.name}}</cite>
             <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
             <i
               class="layui-badge fly-badge-vip"
-              v-if="item.uid.isVip !== '0'"
-            >{{'VIP' + item.uid.isVip}}</i>
+              v-if="item.isVip !== '0'"
+            >{{'VIP' + item.isVip}}</i>
           </router-link>
           <span>{{item.created | moment}}</span>
 

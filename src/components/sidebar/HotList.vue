@@ -1,23 +1,37 @@
 <template>
   <div>
-    hotlist
+    <dl class="fly-panel fly-list-one">
+      <dt class="fly-panel-title">本周热议</dt>
+      <dd v-for="(item, index) in lists" :key="'hotlist' + index">
+        <router-link :to="{name: 'detail', params: {tid: item._id}}">{{item.title}}</router-link>
+        <span>
+          <i class="iconfont icon-pinglun1"></i>
+          {{item.answer}}
+        </span>
+      </dd>
+ 
+    </dl>
   </div>
 </template>
 
 <script>
+import { getTop } from '@/api/content'
 export default {
-    name:'hotlist',
-    data() {
+  name: 'hotlist',
+  data () {
     return {
-
+      lists: []
     }
-    },
-    components: {
-
-    }
+  },
+  mounted () {
+    getTop().then((res) => {
+      if (res.code === 200) {
+        this.lists = res.data
+      }
+    })
+  }
 }
 </script>
 
-<style scoped lang="scss">
-
+<style lang="scss" scoped>
 </style>

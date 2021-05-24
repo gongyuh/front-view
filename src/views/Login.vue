@@ -139,6 +139,18 @@ export default {
       }).then((res) => {
         if (res.code === 200) {
           console.log(res)
+          // 存储用户的登录名
+          res.data.username = this.username
+          this.$store.commit('setUserInfo', res.data)
+          this.$store.commit('setIsLogin', true)
+          this.$store.commit('setToken', res.token)
+          this.username = ''
+          this.password = ''
+          this.code = ''
+          requestAnimationFrame(() => {
+            this.$refs.observer && this.$refs.observer.reset()
+          })
+          this.$router.push({ name: 'index' })
         }
       }).catch((err) => {
         const data = err.response.data
