@@ -16,11 +16,14 @@ const Posts = () => import('./components/user/Posts')
 const Msg = () => import('./components/user/Msg')
 const Others = () => import('./components/user/Others')
 const User = () => import ('./views/User.vue')
-//定义的center-子路由-子路由
+//定义的center-setting子路由-子路由
 const MyInfo = () => import('./components/user/common/MyInfo')
 const Passwd = () => import('./components/user/common/Passwd')
 const Accounts = () => import('./components/user/common/Accounts')
 const PicUpload = () => import('./components/user/common/PicUpload')
+//定义的center-post子路由-子路由
+const MyPost = () => import('./components/user/common/MyPost')
+const MyCollection = () => import('./components/user/common/MyCollection')
 
 
 Vue.use(VueRouter)
@@ -69,28 +72,6 @@ const routes = [
     name: 'user',
     props: true,
     component: User,
-    children: [
-      {
-        path: 'info',
-        name: 'info',
-        component: MyInfo
-      },
-      {
-        path: 'picupload',
-        name: 'picupload',
-        component: PicUpload
-      },
-      {
-        path: 'passwd',
-        name: 'passwd',
-        component: Passwd
-      },
-      {
-        path: 'accounts',
-        name: 'accounts',
-        component: Accounts
-      },
-    ]
   },
   {
     path: '/center',
@@ -106,7 +87,29 @@ const routes = [
       {
         path: '/settings',
         name: 'settings',
-        component: Settings
+        component: Settings,
+        children: [
+          {
+            path: 'info',
+            name: 'info',
+            component: MyInfo
+          },
+          {
+            path: 'pic',
+            name: 'pic',
+            component: PicUpload
+          },
+          {
+            path: 'passwd',
+            name: 'passwd',
+            component: Passwd
+          },
+          {
+            path: 'account',
+            name: 'account',
+            component: Accounts
+          },
+        ]
       },
       {
         path: '/msg',
@@ -116,7 +119,19 @@ const routes = [
       {
         path: '/posts',
         name: 'posts',
-        component: Posts
+        component: Posts,
+        children: [
+          {
+            path: '',
+            name: 'mypost',
+            component: MyPost
+          },
+          {
+            path:'mycollection',
+            name:'mycollection',
+            component: MyCollection
+          }
+        ]
       },
       {
         path: '/others',

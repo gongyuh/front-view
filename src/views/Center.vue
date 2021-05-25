@@ -3,7 +3,7 @@
     <ul class="layui-nav layui-nav-tree" lay-filter="test">
       <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
       <li class="layui-nav-item" v-for="(item,index) in lists" :key="'center' + index">
-        <router-link :to="{name: item.link, params: {uid: uid}}" :active-class="item.activeClass">
+        <router-link :to="{name: item.link}" :active-class="item.activeClass">
           <i class="layui-icon" :class="item.icon"></i>
           {{item.name}}
         </router-link>

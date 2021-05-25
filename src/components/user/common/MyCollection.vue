@@ -1,6 +1,6 @@
 <template>
   <div>
-      我的个人资料
+      我的收藏帖子
   </div>
 </template>
 

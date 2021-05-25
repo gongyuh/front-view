@@ -1,6 +1,6 @@
 <template>
   <div>
-      我的个人资料
+      我的发帖信息
   </div>
 </template>
 
