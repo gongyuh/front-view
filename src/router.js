@@ -1,3 +1,4 @@
+// import { indexOf } from 'core-js/core/array'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from'./views/Home.vue'
@@ -15,6 +16,12 @@ const Posts = () => import('./components/user/Posts')
 const Msg = () => import('./components/user/Msg')
 const Others = () => import('./components/user/Others')
 const User = () => import ('./views/User.vue')
+//定义的center-子路由-子路由
+const MyInfo = () => import('./components/user/common/MyInfo')
+const Passwd = () => import('./components/user/common/Passwd')
+const Accounts = () => import('./components/user/common/Accounts')
+const PicUpload = () => import('./components/user/common/PicUpload')
+
 
 Vue.use(VueRouter)
 
@@ -61,7 +68,29 @@ const routes = [
     path: '/user/:uid',
     name: 'user',
     props: true,
-    component: User
+    component: User,
+    children: [
+      {
+        path: 'info',
+        name: 'info',
+        component: MyInfo
+      },
+      {
+        path: 'picupload',
+        name: 'picupload',
+        component: PicUpload
+      },
+      {
+        path: 'passwd',
+        name: 'passwd',
+        component: Passwd
+      },
+      {
+        path: 'accounts',
+        name: 'accounts',
+        component: Accounts
+      },
+    ]
   },
   {
     path: '/center',
@@ -71,7 +100,7 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'centet',
+        name: 'center',
         component: UserCenter
       },
       {

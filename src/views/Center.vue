@@ -22,7 +22,7 @@ export default {
         {
           name: '我的主页',
           icon: 'layui-icon-home',
-          link: 'home'
+          link: 'center'
         },
         {
           name: '用户中心',
@@ -32,7 +32,7 @@ export default {
         {
           name: '基本设置',
           icon: 'layui-icon-set',
-          link: 'info',
+          link: 'settings',
         },
         {
           name: '我的帖子',
